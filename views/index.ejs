@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>the dojo message board</h1>
+    <hr>
+    <form action='/createMessage' method='POST'>
+        <label>Name:</label>
+        <input type='text' name='name' class='form-control'>
+        <br>
+        <label>Message:</label>
+        <textarea name='message' class='form-control'></textarea>
+        <button>Post Message</button>
+    </form>
+        <% if(typeof(errors) !== 'undefined' ) { %>
+             <% for (const key in errors) { %>
+                <%= errors[key].message %>
+                    <% } %>
+                    <% } %>
+                    
+    <% for(var message of messages) { %>
+        <h2>Name: <%= message.name %></h2> 
+        <h2>Message: <%= message.message %></h2>
+        
+        <br>
+        <hr>
+                        
+    <h2> <%= message.comments.name %></h2>
+    <h2> <%= message.comments.comment %></h2>
+    <% for(var comment of message.comments) { %>
+        
+        <%= comment.name %>
+        <%= comment.comment %>
+
+   <% } %>
+
+    <form action='/createComment/<%= message._id %>' method='POST'>
+        <label>Name:</label>
+        <input type='text' name='name' class='form-control'>
+        <br>
+        <label>Comment:</label>
+        <textarea name='comment' class='form-control'></textarea>
+        <button>Post Comment</button>
+        
+        <%} %>
+    </form>
+
+</body>
+
+</html>
